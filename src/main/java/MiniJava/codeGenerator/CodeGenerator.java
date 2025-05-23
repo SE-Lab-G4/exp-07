@@ -140,42 +140,31 @@ public class CodeGenerator {
         memory.add3AddressCode(Operation.ASSIGN, s1, s2, null);
     }
 
-    public void add() {
+    private void arithmeticOperation(Operation op, String errorMsg) {
         Address temp = new Address(memory.getTemp(), VarType.Int);
         memory.incrementTemp();
         Address s2 = ss.pop();
         Address s1 = ss.pop();
 
         if (s1.getVarType() != VarType.Int || s2.getVarType() != VarType.Int) {
-            ErrorHandler.printError("In add two operands must be integer");
+            ErrorHandler.printError(errorMsg);
         }
-        memory.add3AddressCode(Operation.ADD, s1, s2, temp);
+        memory.add3AddressCode(op, s1, s2, temp);
         ss.push(temp);
+    }
+
+    public void add() {
+        arithmeticOperation(Operation.ADD, "In add two operands must be integer");
     }
 
     public void sub() {
-        Address temp = new Address(memory.getTemp(), VarType.Int);
-        memory.incrementTemp();
-        Address s2 = ss.pop();
-        Address s1 = ss.pop();
-        if (s1.getVarType() != VarType.Int || s2.getVarType() != VarType.Int) {
-            ErrorHandler.printError("In sub two operands must be integer");
-        }
-        memory.add3AddressCode(Operation.SUB, s1, s2, temp);
-        ss.push(temp);
+        arithmeticOperation(Operation.SUB, "In sub two operands must be integer");
     }
 
     public void mult() {
-        Address temp = new Address(memory.getTemp(), VarType.Int);
-        memory.incrementTemp();
-        Address s2 = ss.pop();
-        Address s1 = ss.pop();
-        if (s1.getVarType() != VarType.Int || s2.getVarType() != VarType.Int) {
-            ErrorHandler.printError("In mult two operands must be integer");
-        }
-        memory.add3AddressCode(Operation.MULT, s1, s2, temp);
-        ss.push(temp);
+        arithmeticOperation(Operation.MULT, "In mult two operands must be integer");
     }
+
 
     public void label() {
         ss.push(new Address(memory.getCurrentCodeBlockAddress(), VarType.Address));
