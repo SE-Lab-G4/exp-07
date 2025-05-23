@@ -2,33 +2,12 @@
 Mini-Java is a subset of Java. MiniJava compiler implement a compiler for the Mini-java
 programming language.
 
-# Rules of MiniJava
-```
-Goal --> Source EOF
-Source --> ClassDeclarations MainClass
-MainClass --> class Identifier { public static void main() { VarDeclarations Statements}}
-ClassDeclarations --> ClassDeclaration ClassDeclarations | lambda
-ClassDeclaration --> class Identifier Extension { FieldDeclarations MethodDeclarations }
-Extension --> extends Identifier | lambda
-FieldDeclarations --> FieldDeclaration FieldDeclarations | lambda
-FieldDeclaration --> static Type Identifier ;
-VarDeclarations --> VarDeclaration VarDeclarations | lambda
-VarDeclaration --> Type Identifier ;
-MethodDeclarations --> MethodDeclaration MethodDeclarations | lambda
-MethodDeclaration --> public static Type Identifier ( Parameters ) { VarDeclarations Statements return GenExpression ; }
-Parameters --> Type Identifier Parameter | lambda
-Parameter --> , Type Identifier Parameter | lambda
-Type --> boolean | int
-Statements --> Statements Statement | lambda
-Statement --> { Statements } | if ( GenExpression ) Statement else Statement | while ( GenExpression ) Statement | System.out.println ( GenExpression ) ; | Identifier = GenExpression ;
-GenExpression --> Expression | RelExpression
-Expression --> Expression + Term | Expression - Term | Term
-Term --> Term * Factor | Factor
-Factor --> ( Expression ) | Identifier | Identifier . Identifier | Identifier . Identifier ( Arguments ) | true | false | Integer
-RelExpression --> RelExpression && RelTerm | RelTerm
-RelTerm --> Expression == Expression | Expression < Expression
-Arguments --> GenExpression Argument | lambda
-Argument --> , GenExpression Argument | lambda
-Identifier --> <IDENTIFIER_LITERAL>
-Integer --> <INTEGER_LITERAL>
-```
+# بخش اول
+* اعمال الگوی Facade:
+  برای کلاس‌های CodeGenerator و Parser، دو کلاس Facade ساخته شد تا پیجیدگی داخل این دو کلاس را پنهان کند و یک رابط ساده برای ارتباط با آنها ارائه کند
+* پلی مورفیسم بجای شرط:
+  در کلاس SymbolType یک پارامتر به Enum ها اضافه شد که VarType مربوط به هر مورد را ذخیره کند، و همین امر کمک کرد switch مختلف از بین بروند و تنها گرفتن مقدار varType انجام شود.
+* اعمال Separate Query From Modifier:
+  برای این مورد در کلاس Memory، به جای توابع get قبلی، دو تابع جدید نوشته شده اند، که یکی وظیفه‌اش تنها get کردن و دیگری increment کردن است. 
+* اعمال Self Encapsulated Field:
+  در کلاس‌ Address این مورد انجام شده است.
