@@ -11,6 +11,7 @@ programming language.
   برای این مورد در کلاس Memory، به جای توابع get قبلی، دو تابع جدید نوشته شده اند، که یکی وظیفه‌اش تنها get کردن و دیگری increment کردن است. 
 * اعمال Self Encapsulated Field:
   در کلاس‌ Address این مورد انجام شده است.
+* دو مورد بازآرایی دیگر: در کلاس CodeGenerator یک extract method انجام دادیم که از تکرار کد جلوگیری کند. بعلاوه در کلاس Main یک extract vaiable انجام دادیم.
 
    # بخش دوم
 
